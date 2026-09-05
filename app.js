@@ -144,11 +144,8 @@ function updateTotals() {
   document.getElementById("totalIntegrative").textContent = euro(totals.integrative);
   document.getElementById("totalTax").textContent = euro(totals.tax);
 
-  // Accantonamento: contributo soggettivo + imposta sostitutiva.
-  // Il contributo integrativo 4% è esposto separatamente perché viene addebitato al cliente.
-  document.getElementById("totalReserve").textContent = euro(totals.subjective + totals.tax);
-  document.getElementById("totalNet").textContent = euro(totals.net);
-}
+// Accantonamento: contributo soggettivo + contributo integrativo 4% + imposta sostitutiva.
+document.getElementById("totalReserve").textContent = euro(totals.subjective + totals.integrative + totals.tax);
 
 function renderInvoices() {
   const invoices = getInvoices();
