@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#173b6f">
+  <title>Calcolo Regime Forfettario - Simona</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div>
+        <h1>CALCOLO REGIME FORFETTARIO</h1>
+        <p>Architetto · Inarcassa · Imposta 15%</p>
+      </div>
+      <div class="top-icon">▣</div>
+    </header>
+
+    <section id="dashboardView" class="view active">
+      <section class="input-card">
+        <div>
+          <label for="invoiceAmount">IMPORTO FATTURATO</label>
+          <small>compenso professionale, senza IVA e senza 4% Inarcassa</small>
+        </div>
+        <div class="amount-wrap">
+          <span>€</span>
+          <input id="invoiceAmount" inputmode="decimal" placeholder="0,00" autocomplete="off">
+        </div>
+      </section>
+
+      <section class="description-card">
+        <label for="invoiceDescription">DESCRIZIONE SERVIZI PRESTATI</label>
+        <input id="invoiceDescription" type="text" placeholder="Es. Progettazione, direzione lavori..." autocomplete="off">
+      </section>
+
+      <p class="hint">Inserisci l’importo della fattura: tutti i calcoli si aggiornano automaticamente.</p>
+
+      <section class="cards-grid">
+        <article class="calc-card">
+          <div class="icon">▦</div>
+          <h3>Reddito Imponibile Lordo</h3>
+          <p>78% dell’importo fatturato</p>
+          <strong id="taxableGross">€ 0,00</strong>
+        </article>
+
+        <article class="calc-card">
+          <div class="icon">C</div>
+          <h3>Contributo Soggettivo Inarcassa</h3>
+          <p>14,5% del reddito imponibile lordo</p>
+          <strong id="inarcassaSubjective">€ 0,00</strong>
+        </article>
+
+        <article class="calc-card">
+          <div class="icon">4%</div>
+          <h3>Contributo Integrativo Inarcassa</h3>
+          <p>4% del compenso, addebitato al cliente</p>
+          <strong id="inarcassaIntegrative">€ 0,00</strong>
+        </article>
+
+        <article class="calc-card">
+          <div class="icon">=</div>
+          <h3>Reddito Imponibile Netto</h3>
+          <p>imponibile lordo − contributo soggettivo</p>
+          <strong id="taxableNet">€ 0,00</strong>
+        </article>
+
+        <article class="calc-card">
+          <div class="icon">%</div>
+          <h3>Imposta Sostitutiva</h3>
+          <p>15% del reddito imponibile netto</p>
+          <strong id="tax">€ 0,00</strong>
+        </article>
+
+        <article class="calc-card">
+          <div class="icon">▭</div>
+          <h3>Incassi Netti</h3>
+          <p>imponibile lordo − Inarcassa − imposta</p>
+          <strong id="netTaxable">€ 0,00</strong>
+        </article>
+
+        <article class="calc-card">
+          <div class="icon small">QUOTA<br>ESENTE</div>
+          <h3>Quota Esente</h3>
+          <p>22% dell’importo fatturato</p>
+          <strong id="exemptQuota">€ 0,00</strong>
+        </article>
+
+        <article class="calc-card accent">
+          <div class="icon">↗</div>
+          <h3>Guadagni Netti</h3>
+          <p>incassi netti + quota esente</p>
+          <strong id="netEarnings">€ 0,00</strong>
+        </article>
+      </section>
+
+      <section class="invoice-total-card">
+        <div>
+          <span>Totale fattura con 4% Inarcassa</span>
+          <small>compenso + contributo integrativo</small>
+        </div>
+        <strong id="invoiceTotalWith4">€ 0,00</strong>
+      </section>
+
+      <button id="saveInvoiceBtn" class="primary-btn">REGISTRA FATTURA</button>
+
+      <section class="totals">
+        <div><span>Totale importi fatturati</span><strong id="totalGross">€ 0,00</strong></div>
+        <div><span>Totale contributi soggettivi Inarcassa</span><strong id="totalSubjective">€ 0,00</strong></div>
+        <div><span>Totale contributi integrativi 4%</span><strong id="totalIntegrative">€ 0,00</strong></div>
+        <div><span>Totale Imposta Sostitutiva</span><strong id="totalTax">€ 0,00</strong></div>
+        <div><span>Totale Accantonamenti fiscali</span><strong id="totalReserve">€ 0,00</strong></div>
+      </section>
+
+      <section class="grand-total">
+        <span>Guadagni Netti Cumulativi</span>
+        <strong id="totalNet">€ 0,00</strong>
+      </section>
+
+      <p class="legal-note">
+        Stima gestionale. I contributi minimi Inarcassa e il contributo maternità/paternità
+        non sono ripartiti automaticamente su ogni fattura e vanno verificati annualmente.
+      </p>
+    </section>
+
+    <section id="invoicesView" class="view">
+      <div class="section-head">
+        <h2>FATTURE</h2>
+        <button id="clearAllBtn" class="danger-link">Cancella tutto</button>
+      </div>
+      <div id="invoiceList" class="invoice-list"></div>
+      <div id="emptyState" class="empty-state">Nessuna fattura registrata.</div>
+    </section>
+
+    <nav class="bottom-nav">
+      <button id="dashboardTab" class="nav-btn active">DASHBOARD</button>
+      <button id="invoicesTab" class="nav-btn">FATTURE</button>
+    </nav>
+  </main>
+
+  <script src="app.js?v=1"></script>
+</body>
+</html>
